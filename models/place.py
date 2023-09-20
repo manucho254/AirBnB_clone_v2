@@ -33,17 +33,18 @@ class Place(BaseModel, Base):
     @property
     def reviews(self):
         """ The getter attribute for use with FileStorage """
+        review_objs = []
+
         if STORAGE != 'db':
             from models import storage
 
             all_objs = storage.all()
-            review_objs = []
             for obj in all_objs.items():
                 a, b = obj
                 if 'Review' in a and self.id in b:
                     review_objs.append(obj)
 
-            return review_objs
+        return review_objs
 
     @property
     def amenities(self):
@@ -52,18 +53,18 @@ class Place(BaseModel, Base):
             the attribute amenity_ids that contains
             all Amenity.id linked to the Place.
         """
+        instances = []
 
         if STORAGE != 'db':
             from models import storage
             from model.amenity import Amenity
 
-            instances = []
             objects = storage.all(Amenity)
             for _id in type(self).amenity_ids:
                 for key, val in objects.items():
                     if val.id == _id:
                         instances.append(val)
-            return instances
+        return instances
 
     @amenities.setter
     def amenities(self, obj):
