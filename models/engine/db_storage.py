@@ -60,18 +60,13 @@ class DBStorage:
 
         if cls is None:
             for obj in classes:
-                try:
-                    objs = self.__session.query(obj).all()
-                    data.extend(objs)
-                except Exception as e:
-                    pass
+                objs = self.__session.query(obj)
+                data.extend(objs)
         else:
-            class_name = cls.__module__.split(".")[1].capitalize()
-            data = self.__session.query(cls).all()
+            data = self.__session.query(cls)
 
         for obj in data:
-            if class_name is None:
-                class_name = obj.__module__.split(".")[1].capitalize()
+            class_name = obj.__class__.__name__
             key = "{}.{}".format(class_name, obj.id)
             objects[key] = obj
 
