@@ -71,7 +71,6 @@ class DBStorage:
 
         for obj in data:
             if class_name is None:
-                print(obj.__class__.__name__)
                 class_name = obj.__module__.split(".")[1].capitalize()
             key = "{}.{}".format(class_name, obj.id)
             objects[key] = obj
