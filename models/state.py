@@ -18,9 +18,11 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
     name = Column(String(128))
-    cities = relationship('City',
-                          backref='state',
-                          cascade='all, delete')
+
+    if STORAGE == "db":
+        cities = relationship('City',
+                              backref='state',
+                              cascade='all, delete')
 
     @property
     def cities(self):
@@ -29,10 +31,9 @@ class State(BaseModel, Base):
         """
         cities_arr = []
 
-        if STORAGE != "db":
-            objects = models.storage.all(City)
-            for val in objects.values():
-                if self.id == val.state_id:
-                    cities_arr.append(val)
+        objects = models.storage.all(City)
+        for val in objects.values():
+            if self.id == val.state_id:
+                cities_arr.append(val)
 
         return cities_arr
