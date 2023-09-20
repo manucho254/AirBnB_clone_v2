@@ -55,10 +55,11 @@ class Place(BaseModel, Base):
 
         if STORAGE != 'db':
             from models import storage
+            from model.amenity import Amenity
 
             instances = []
-            objects = storage.all()
-            for _id in self.amenity_ids:
+            objects = storage.all(Amenity)
+            for _id in type(self).amenity_ids:
                 for key, val in objects.items():
                     if val.id == _id:
                         instances.append(val)
@@ -76,4 +77,4 @@ class Place(BaseModel, Base):
             if not isinstance(obj, Amenity):
                 return
 
-            self.amenity_ids.append(obj.id)
+            type(self).amenity_ids.append(obj.id)
