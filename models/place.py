@@ -27,6 +27,7 @@ class Place(BaseModel, Base):
     reviews = relationship("Review", backref="place", cascade="all, delete")
     amenities = relationship("Amenity",
                              secondary=association_table,
+                             back_populates="amenities",
                              viewonly=False
                              )
     amenity_ids = []
@@ -71,9 +72,9 @@ class Place(BaseModel, Base):
             append method for adding an Amenity.id
             to the attribute amenity_ids
         """
-        from models.amenity import Amenity
-
         if STORAGE != 'db':
+            from models.amenity import Amenity
+
             if not isinstance(obj, Amenity):
                 return
 

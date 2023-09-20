@@ -6,7 +6,6 @@ from sqlalchemy.orm import relationship
 
 from models.base_model import BaseModel, Base
 
-
 association_table = Table('place_amenity', Base.metadata,
                           Column('place_id',
                                  ForeignKey('places.id'),
@@ -22,4 +21,6 @@ class Amenity(BaseModel, Base):
     """
     __tablename__ = "amenities"
     name = Column(String(128))
-    place_amenities = relationship("Place", secondary=association_table)
+    place_amenities = relationship("Place",
+                                   back_populates="places",
+                                   secondary=association_table)
