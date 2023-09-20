@@ -63,7 +63,7 @@ class DBStorage:
                 objs = self.__session.query(obj).all()
                 data.extend(objs)
         else:
-            data = self.__session.query(cls).all()
+            data.extend(self.__session.query(cls).all())
 
         for obj in data:
             class_name = obj.__class__.__name__
