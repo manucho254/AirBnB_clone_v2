@@ -81,7 +81,6 @@ class DBStorage:
         """ add the object to the current database session
         """
         self.__session.add(obj)
-        self.save()
 
     def save(self):
         """
@@ -99,7 +98,6 @@ class DBStorage:
             return
 
         self.__session.delete(obj)
-        self.save()
 
     def reload(self):
         """ create all tables in the database
