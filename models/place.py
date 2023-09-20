@@ -1,9 +1,14 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
+from models.amenity import association_table
+
 from os import getenv
+
 from sqlalchemy import Column, Integer, ForeignKey, Float, String
 from sqlalchemy.orm import relationship
+
+STORAGE = getenv('HBNB_TYPE_STORAGE')
 
 
 class Place(BaseModel, Base):
@@ -20,12 +25,16 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     reviews = relationship("Review", backref="place", cascade="all, delete")
+    amenities = relationship("Amenity",
+                             secondary=association_table,
+                             viewonly=False
+                             )
     amenity_ids = []
 
     @property
     def reviews(self):
         """ The getter attribute for use with FileStorage """
-        if getenv('HBNB_TYPE_STORAGE') != 'db':
+        if STORAGE != 'db':
             from models import storage
             all_objs = storage.all()
             review_objs = []
@@ -35,3 +44,36 @@ class Place(BaseModel, Base):
                     review_objs.append(obj)
 
             return review_objs
+
+    @property
+    def amenities(self):
+        """ Getter attribute amenities that returns
+            the list of Amenity instances based on
+            the attribute amenity_ids that contains
+            all Amenity.id linked to the Place.
+        """
+
+        if STORAGE != 'db':
+            from models import storage
+
+            instances = []
+            objects = storage.all()
+            for _id in self.amenity_ids:
+                for key, val in objects.items():
+                    if val.id == _id:
+                        instances.append(val)
+            return instances
+
+    @property.setter
+    def amenities(self, obj):
+        """ Setter attribute amenities that handles
+            append method for adding an Amenity.id
+            to the attribute amenity_ids
+        """
+        from models.amenity import Amenity
+
+        if not isinstance(obj, Amenity):
+            return
+
+        if STORAGE != 'db':
+            self.amenity_ids.append(obj.id)

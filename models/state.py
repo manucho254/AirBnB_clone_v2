@@ -18,23 +18,22 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
     name = Column(String(128))
-
-    if STORAGE == "db":
-        cities = relationship('City',
-                              backref='state',
-                              cascade='all, delete')
+    cities = relationship('City',
+                          backref='state',
+                          cascade='all, delete')
 
     @property
     def cities(self):
         """ function that returns
             all cities related to state
         """
-        objects = models.storage.all()
-        cities_arr = []
+        if STORAGE != "db":
+            objects = models.storage.all()
+            cities_arr = []
 
-        for obj in objects:
-            if isinstance(obj, City):
-                if self.id == obj.state_id:
-                    cities_arr.append(obj)
+            for obj in objects:
+                if isinstance(obj, City):
+                    if self.id == obj.state_id:
+                        cities_arr.append(obj)
 
-        return cities_arr
+            return cities_arr
