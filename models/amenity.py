@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 
 from models.base_model import BaseModel, Base
 
-association_table = Table('place_amenity', Base.metadata,
+place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id'),
                                  primary_key=True),
@@ -23,4 +23,4 @@ class Amenity(BaseModel, Base):
     name = Column(String(128))
     place_amenities = relationship("Place",
                                    backref='amenities',
-                                   secondary=association_table)
+                                   secondary=place_amenity)
