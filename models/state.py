@@ -17,12 +17,14 @@ STORAGE = os.getenv("HBNB_TYPE_STORAGE")
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
-    name = Column(String(128))
 
     if STORAGE == "db":
+        name = Column(String(128))
         cities = relationship('City',
                               backref='state',
                               cascade='all, delete')
+    else:
+        name = ""
 
     @property
     def cities(self):
