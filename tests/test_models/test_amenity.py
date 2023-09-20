@@ -16,4 +16,7 @@ class test_Amenity(test_basemodel):
     def test_name2(self):
         """ """
         new = self.value()
+        dict_ = new.to_dict()
+        dict_["name"] = "test"
+        new = self.value(**dict_)
         self.assertEqual(type(new.name), str)
