@@ -36,6 +36,7 @@ class Place(BaseModel, Base):
         """ The getter attribute for use with FileStorage """
         if STORAGE != 'db':
             from models import storage
+
             all_objs = storage.all()
             review_objs = []
             for obj in all_objs.items():
@@ -72,8 +73,8 @@ class Place(BaseModel, Base):
         """
         from models.amenity import Amenity
 
-        if not isinstance(obj, Amenity):
-            return
-
         if STORAGE != 'db':
+            if not isinstance(obj, Amenity):
+                return
+
             self.amenity_ids.append(obj.id)
