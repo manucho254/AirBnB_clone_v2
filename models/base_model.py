@@ -24,27 +24,26 @@ class BaseModel:
         """Instatntiates a new model"""
 
         if kwargs:
-            if 'id' not in kwargs:
+            if not kwargs.get('id'):
                 self.id = str(uuid.uuid4())
 
-            if 'created_at' in kwargs.keys():
+            if kwargs.get('created_at'):
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                          '%Y-%m-%dT%H:%M:%S.%f'
                                                          )
-            if 'updated_at' in kwargs.keys():
+            if kwargs.get('updated_at'):
                 kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                          '%Y-%m-%dT%H:%M:%S.%f'
                                                          )
-            if 'created_at' not in kwargs.keys():
+            if not kwargs.get('created_at'):
                 self.created_at = datetime.now()
 
-            if 'created_at' in kwargs.keys() and\
-               'updated_at' not in kwargs.keys():
+            if kwargs.get('created_at') and kwargs.get('updated_at'):
                 self.updated_at = self.created_at
             else:
                 self.updated_at = datetime.now()
 
-            if '__class__' in kwargs.keys():
+            if kwargs.get('__class__'):
                 del kwargs['__class__']
 
             self.__dict__.update(kwargs)
