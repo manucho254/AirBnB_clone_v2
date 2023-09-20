@@ -42,6 +42,7 @@ class DBStorage:
         self.__engine = create_engine(my_db, pool_pre_ping=True)
 
         if ENV == "test":
+
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None) -> dict:
@@ -60,7 +61,7 @@ class DBStorage:
         if cls is None:
             for x in classes:
                 objs = self.__session.query(x).all()
-                data.extend(obj)
+                data.extend(objs)
         else:
             class_name = cls.__module__.split(".")[1].capitalize()
             data = self.__session.query(cls).all()
@@ -77,6 +78,7 @@ class DBStorage:
         """ add the object to the current database session
         """
         self.__session.add(obj)
+        self.save()
 
     def save(self):
         """
@@ -94,6 +96,7 @@ class DBStorage:
             return
 
         self.__session.delete(obj)
+        self.save()
 
     def reload(self):
         """ create all tables in the database
