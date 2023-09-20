@@ -4,6 +4,11 @@
 from models import *
 
 
+State = state.State
+User = user.User
+Place = place.Place
+Amenity = amenity.Amenity
+
 # creation of a State
 state = State(name="California")
 state.save()
