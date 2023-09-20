@@ -25,6 +25,7 @@ class Place(BaseModel, Base):
     reviews = relationship("Review", backref="place", cascade="all, delete")
     amenities = relationship("Amenity",
                              secondary='association_table',
+                             backref='place_amenities',
                              viewonly=False
                              )
     amenity_ids = []

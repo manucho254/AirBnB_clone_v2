@@ -8,6 +8,7 @@ State = state.State
 User = user.User
 Place = place.Place
 Amenity = amenity.Amenity
+City = city.City
 
 # creation of a State
 state = State(name="California")

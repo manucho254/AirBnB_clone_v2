@@ -14,7 +14,7 @@ Base = declarative_base()
 class BaseModel:
     """A base class for all hbnb models"""
 
-    id = Column(String(60), primary_key=True, unique=True)
+    id = Column(String(60), primary_key=True)
     created_at = Column(DateTime,
                         default=datetime.utcnow())
     updated_at = Column(DateTime,
@@ -28,6 +28,9 @@ class BaseModel:
             self.updated_at = datetime.now()
 
         else:
+            if 'id' not in kwargs:
+                self.id = str(uuid.uuid4())
+
             if 'created_at' in kwargs.keys():
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                          '%Y-%m-%dT%H:%M:%S.%f'
