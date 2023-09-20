@@ -39,6 +39,13 @@ class BaseModel:
                 kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                          '%Y-%m-%dT%H:%M:%S.%f'
                                                          )
+            if 'created_at' not in kwargs.keys():
+                self.created_at = datetime.now()
+
+            if 'created_at' in kwargs.keys() and\
+               'updated_at' not in kwargs.keys():
+                self.updated_at = self.created_at
+
             if '__class__' in kwargs.keys():
                 del kwargs['__class__']
             self.__dict__.update(kwargs)
@@ -67,10 +74,8 @@ class BaseModel:
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
 
-        if 'created_at' in dictionary.keys():
-            dictionary['created_at'] = self.created_at.isoformat()
-        if 'updated_at' in dictionary.keys():
-            dictionary['updated_at'] = self.updated_at.isoformat()
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
 
         return dictionary
 
