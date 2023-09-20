@@ -64,7 +64,7 @@ class Place(BaseModel, Base):
                         instances.append(val)
             return instances
 
-    @property.setter
+    @amenities.setter
     def amenities(self, obj):
         """ Setter attribute amenities that handles
             append method for adding an Amenity.id

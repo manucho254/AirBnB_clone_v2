@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
 
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Table, Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 from models.base_model import BaseModel, Base
 
 
 association_table = Table('place_amenity', Base.metadata,
-                          Column(String(60), 'place_id',
+                          Column('place_id',
                                  ForeignKey('places.id'),
                                  primary_key=True),
-                          Column(String(60), 'amenity_id',
-                                 ForeignKey('amenities.id',
-                                 primary_ky=True))
+                          Column('amenity_id',
+                                 ForeignKey('amenities.id'),
+                                 primary_key=True)
                           )
 
 
