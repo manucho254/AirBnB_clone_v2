@@ -61,6 +61,7 @@ class DBStorage:
         if cls is None:
             for x in classes:
                 objs = self.__session.query(x).all()
+                print(objs)
                 data.extend(objs)
         else:
             class_name = cls.__module__.split(".")[1].capitalize()

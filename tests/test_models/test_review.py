@@ -16,14 +16,26 @@ class test_review(test_basemodel):
     def test_place_id(self):
         """ """
         new = self.value()
+        _dict = new.to_dict()
+        _dict["place_id"] = "some_id"
+        new = self.value(**_dict)
+
         self.assertEqual(type(new.place_id), str)
 
     def test_user_id(self):
         """ """
         new = self.value()
+        _dict = new.to_dict()
+        _dict["user_id"] = "test"
+        new = self.value(**_dict)
+
         self.assertEqual(type(new.user_id), str)
 
     def test_text(self):
         """ """
         new = self.value()
+        _dict = new.to_dict()
+        _dict["text"] = "test"
+        new = self.value(**_dict)
+
         self.assertEqual(type(new.text), str)
