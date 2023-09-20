@@ -25,7 +25,7 @@ class BaseModel:
         if len(kwargs) == 0 or kwargs is None:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            #self.updated_at = datetime.now()
 
         else:
             if 'id' not in kwargs:
@@ -45,9 +45,12 @@ class BaseModel:
             if 'created_at' in kwargs.keys() and\
                'updated_at' not in kwargs.keys():
                 self.updated_at = self.created_at
+            else:
+                self.updated_at = datetime.now()
 
             if '__class__' in kwargs.keys():
                 del kwargs['__class__']
+
             self.__dict__.update(kwargs)
 
     def __str__(self):
