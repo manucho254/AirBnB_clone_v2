@@ -16,4 +16,8 @@ class test_state(test_basemodel):
     def test_name3(self):
         """ """
         new = self.value()
+        dict_ = new.to_dict()
+        dict_['name'] = "Kanairo"
+        new = self.value(**dict_)
+
         self.assertEqual(type(new.name), str)
