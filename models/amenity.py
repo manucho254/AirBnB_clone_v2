@@ -22,4 +22,5 @@ class Amenity(BaseModel, Base):
     __tablename__ = "amenities"
     name = Column(String(128))
     place_amenities = relationship("Place",
+                                   back_populates="amenities",
                                    secondary=association_table)
