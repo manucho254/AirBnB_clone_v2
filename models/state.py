@@ -27,13 +27,12 @@ class State(BaseModel, Base):
         """ function that returns
             all cities related to state
         """
+        cities_arr = []
+
         if STORAGE != "db":
-            objects = models.storage.all()
-            cities_arr = []
+            objects = models.storage.all(City)
+            for val in objects.values():
+                if self.id == val.state_id:
+                    cities_arr.append(val)
 
-            for obj in objects:
-                if isinstance(obj, City):
-                    if self.id == obj.state_id:
-                        cities_arr.append(obj)
-
-            return cities_arr
+        return cities_arr
