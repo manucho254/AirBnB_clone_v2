@@ -53,15 +53,15 @@ class DBStorage:
                 cls: class object
         """
 
-        classes = ["User", "State", "City", "Amenity", "Place", "Review"]
+        classes = [User, State, City, Amenity, Place, Review]
         data = []
         objects = {}
         class_name = None
 
         if cls is None:
-            for x in classes:
+            for obj in classes:
                 try:
-                    objs = self.__session.query(x).all()
+                    objs = self.__session.query(obj).all()
                     data.extend(objs)
                 except Exception as e:
                     pass
