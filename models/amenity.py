@@ -24,7 +24,7 @@ class Amenity(BaseModel, Base):
     __tablename__ = "amenities"
 
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
-        name = Column(String(128))
+        name = Column(String(128), nullable=False)
         place_amenities = relationship("Place",
                                        backref='amenities',
                                        secondary=place_amenity)

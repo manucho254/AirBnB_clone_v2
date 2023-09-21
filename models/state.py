@@ -19,7 +19,7 @@ class State(BaseModel, Base):
     __tablename__ = "states"
 
     if STORAGE == "db":
-        name = Column(String(128))
+        name = Column(String(128), nullable=False)
         cities = relationship('City',
                               backref='state',
                               cascade='all, delete')
