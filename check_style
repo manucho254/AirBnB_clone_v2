@@ -5,8 +5,8 @@ FILES=$(find . -name "*.py" -type f);
 # read and loop through the FILES string.
 while IFS=' ' read -ra ADDR;
 do
-	for file in "${ADDR[@]}"; do
-		# process "$file"
+	for file in "${ADDR[@]}";
+    do
 		pycodestyle "$file";
 	done;
 done <<< "$FILES";
