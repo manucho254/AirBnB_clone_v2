@@ -1,0 +1,7 @@
+server {
+
+     root /test/index/fun;
+}
+
+listen      localhost:80;
+#               listen     localhost:110;
