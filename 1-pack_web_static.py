@@ -12,12 +12,13 @@ def do_pack():
     """
     try:
         current_date = datetime.now()
-        file_name = "versions/web_static_{}{}{}{}{}{}.tgz".format(current_date.year,
-                                                         current_date.month,
-                                                         current_date.day,
-                                                         current_date.hour,
-                                                         current_date.minute,
-                                                         current_date.second)
+        file_name = "versions/web_static_{}{}{}{}{}{}.tgz"\
+                    .format(current_date.year,
+                            current_date.month,
+                            current_date.day,
+                            current_date.hour,
+                            current_date.minute,
+                            current_date.second)
         local(f"mkdir -p versions")
         local(f"tar -czvf {file_name} web_static")
     except Exception as e:
