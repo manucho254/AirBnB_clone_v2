@@ -6,6 +6,7 @@ sudo apt-get install nginx
 sudo service nginx start
 
 # create all directories
+sudo mkdir data
 sudo mkdir data/web_static
 sudo mkdir data/web_static/shared
 sudo mkdir data/web_static/current
@@ -20,13 +21,13 @@ echo "
     <body>
           Holberton School
     </body>
-</html>" > /data/web_static/current/index.html
+</html>" | sudo tee data/web_static/current/index.html
 
 #change owner and group of path /data/ and all subpaths
-sudo chown -R ubuntu :ubuntu /data/
+sudo chown -R ubuntu:ubuntu data/
 
 # create a symbolic link
-sudo ln -fs /data/web_static/current /data/web_static/releases/test/
+sudo ln -fs data/web_static/current data/web_static/releases/test/
 
 #change default file
 echo "
@@ -50,7 +51,7 @@ server {
                  # serve content in /data/web_static/current/;
                  alias /data/web_static/current/;
         }
-}" | sudo tee /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+}" | sudo tee /etc/nginix/sites-available/default /etc/nginx/sites-enabled/default
 
 # restart nginx
 sudo service nginx restart
