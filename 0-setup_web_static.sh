@@ -22,7 +22,7 @@ echo "
 sudo chown -R ubuntu:ubuntu /data/
 
 # create a symbolic link
-sudo ln -fs /data/web_static/current data/web_static/releases/test
+sudo ln -fs /data/web_static/current/ data/web_static/releases/test/
 
 #change default file
 echo "
@@ -36,10 +36,18 @@ server {
 
         server_name _;
 
+        # 404 error
+        error_page 404 /error404.html;
+
         location / {
                    # First attempt to serve request as file, then
                    # as directory, then fall back to displaying a 404.
                    try_files \$uri \$uri/ =404;
+        }
+
+        
+        location /redirect_me {
+                  return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
         }
         
         location /hbnb_static {
