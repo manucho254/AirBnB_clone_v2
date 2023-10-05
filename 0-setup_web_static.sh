@@ -6,6 +6,7 @@ if ! dpkg -l | grep "nginx"
 then
     sudo apt-get -y update
     sudo apt-get install nginx
+    sudo service nginx start
 fi
 
 # create all directories
