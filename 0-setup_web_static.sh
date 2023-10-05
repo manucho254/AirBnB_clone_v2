@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-#file that setups all directories in server
+#file that setups all 
+#directories in server
 
 sudo apt-get -y update && sudo apt-get -y upgrade
 sudo apt-get install nginx
@@ -9,8 +10,7 @@ sudo service nginx start
 sudo mkdir -p data/web_static/{shared,releases/test}
 
 # create a fake html file
-echo "
-<html>
+echo "<html>
     <head>
     </head>
     <body>
