@@ -2,8 +2,11 @@
 #file that setups all 
 #directories in server
 
-sudo apt-get -y update
-sudo apt-get install nginx
+if ! dpkg -l | grep "nginx"
+then
+    sudo apt-get -y update
+    sudo apt-get install nginx
+fi
 
 # create all directories
 sudo mkdir -p data/web_static/{shared,releases/test}
