@@ -2,9 +2,8 @@
 #file that setups all 
 #directories in server
 
-sudo apt-get -y update && sudo apt-get -y upgrade
+sudo apt-get -y update
 sudo apt-get install nginx
-sudo service nginx start
 
 # create all directories
 sudo mkdir -p data/web_static/{shared,releases/test}
@@ -21,13 +20,8 @@ echo "<html>
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
-# Check if the symbolic link already exists and delete it
-if [ -L "$target_link" ]; then
-      rm -rf "$target_link"
-fi
-
 # create a symbolic link
-sudo ln -s "$source_path" "$target_link"
+sudo ln -sf "$source_path" "$target_link"
 
 #change owner and group of path /data/ and all subpaths
 sudo chown -R ubuntu:ubuntu /data/
@@ -54,7 +48,6 @@ server {
                    # as directory, then fall back to displaying a 404.
                    try_files \$uri \$uri/ =404;
         }
-
         
         location /redirect_me {
                   return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
@@ -64,7 +57,9 @@ server {
                  # serve content in /data/web_static/current/;
                  alias /data/web_static/current/;
         }
-}" | sudo tee /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+}" | sudo tee /etc/nginx/sites-available/default
+
+sudo cp -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # restart nginx
 sudo service nginx restart
