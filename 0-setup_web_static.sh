@@ -6,7 +6,7 @@ sudo apt-get install nginx
 sudo service nginx start
 
 # create all directories
-sudo mkdir -p /data/{web_static/{shared,current,releases/{test/}}}/
+sudo mkdir -p data/web_static/{shared,current,releases/test}
 
 # create a fake html file
 echo "
@@ -16,7 +16,7 @@ echo "
     <body>
           Holberton School
     </body>
-</html>" | sudo tee data/web_static/current/index.html
+</html>" | sudo tee /data/web_static/current/index.html
 
 #change owner and group of path /data/ and all subpaths
 sudo chown -R ubuntu:ubuntu /data/
