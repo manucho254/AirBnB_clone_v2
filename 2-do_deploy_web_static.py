@@ -60,12 +60,12 @@ def do_deploy(archive_path) -> bool:
         """ create directory
            /data/web_static/releases/<archive filename without extension>
         """
-        run("sudo mkdir -p {}{}".format(releases, archive_name))
+        run("sudo mkdir -p {}{}/".format(releases, archive_name))
         """ Uncompress the archive to the folder
             /data/web_static/releases/<archive filename without extension>
             on the web server.
         """
-        run("sudo tar -xzf {} -C {}{}".format(tmp_archive,
+        run("sudo tar -xzf {} -C {}{}/".format(tmp_archive,
                                               releases,
                                               archive_name))
         # Delete the archive from the web server
@@ -76,9 +76,8 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -sf {}{} {}".format(releases, archive_name, current))
+        run("sudo ln -sf {}{}/ {}".format(releases, archive_name, current))
 
         return True
     except Exception as e:
-        raise e
         return False
