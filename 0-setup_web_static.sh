@@ -1,31 +1,21 @@
 #!/usr/bin/env bash
 # file that setups all directories in server
 
-if ! dpkg -l | grep "nginx"
-then
-    sudo apt-get -y update
-    sudo apt-get -y upgrade
-    sudo apt-get install nginx
-    sudo service nginx start
-fi
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get install nginx
 
 # create all directories
 sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 # create a fake html file
-echo "<html>
-    <head>
-    </head>
-    <body>
-          Holberton School
-    </body>
-</html>" | sudo tee "/data/web_static/releases/test/index.html"
+echo "Holberton Shchool" | sudo tee "/data/web_static/releases/test/index.html"
 
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
 # delete symbolic link
-if [ -L "$target_link" ]
+if -L "$target_link"
 then
     rm -rf "$target_link"
 fi
