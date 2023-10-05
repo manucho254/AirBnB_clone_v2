@@ -80,9 +80,9 @@ def do_deploy(archive_path) -> bool:
             (/data/web_static/releases/<archive filename without extension>
         """
         run("sudo ln -sf {} {}".format(full_path, current))
-        
+
         print("New version deployed!")
-        
+
         return True
     except Exception as e:
         return False
