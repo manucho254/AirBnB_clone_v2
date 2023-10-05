@@ -44,6 +44,8 @@ server {
 
         server_name _;
 
+        add_header X-Served-By \$hostname;
+
         # 404 error
         error_page 404 /error404.html;
 
