@@ -21,8 +21,16 @@ echo "
 #change owner and group of path /data/ and all subpaths
 sudo chown -R ubuntu:ubuntu /data/
 
+source_path="/data/web_static/releases/test/"
+target_link="/data/web_static/current"
+
+# Check if the symbolic link already exists and delete it
+if [ -L "$target_link" ]; then
+      rm "$target_link"
+fi
+
 # create a symbolic link
-sudo ln -sf data/web_static/releases/test/ data/web_static/current/
+sudo ln -s "$source_path" "$target_link"
 
 #change default file
 echo "
