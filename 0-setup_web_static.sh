@@ -22,7 +22,7 @@ echo "
 sudo chown -R ubuntu:ubuntu /data/
 
 # create a symbolic link
-sudo ln -fs /data/web_static/current/ data/web_static/releases/test/
+sudo ln -sf data/web_static/releases/test/ data/web_static/current/
 
 #change default file
 echo "
