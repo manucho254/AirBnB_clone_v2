@@ -6,12 +6,12 @@ sudo apt-get install nginx
 sudo service nginx start
 
 # create all directories
-sudo mkdir data
-sudo mkdir data/web_static
-sudo mkdir data/web_static/shared
-sudo mkdir data/web_static/current
-sudo mkdir data/web_static/releases
-sudo mkdir data/web_static/releases/test
+sudo mkdir /data
+sudo mkdir /data/web_static
+sudo mkdir /data/web_static/shared
+sudo mkdir /data/web_static/current
+sudo mkdir /data/web_static/releases
+sudo mkdir /data/web_static/releases/test
 
 # create a fake html file
 echo "
@@ -24,10 +24,10 @@ echo "
 </html>" | sudo tee data/web_static/current/index.html
 
 #change owner and group of path /data/ and all subpaths
-sudo chown -R ubuntu:ubuntu data/
+sudo chown -R ubuntu:ubuntu /data/
 
 # create a symbolic link
-sudo ln -fs data/web_static/current data/web_static/releases/test/
+sudo ln -fs /data/web_static/current data/web_static/releases/test
 
 #change default file
 echo "
