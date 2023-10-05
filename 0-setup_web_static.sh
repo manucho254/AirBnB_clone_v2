@@ -14,12 +14,6 @@ echo "Holberton Shchool" | sudo tee "/data/web_static/releases/test/index.html"
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
-# delete symbolic link
-if -L "$target_link"
-then
-    rm -rf "$target_link"
-fi
-
 # create a symbolic link
 sudo ln -sf "$source_path" "$target_link"
 
