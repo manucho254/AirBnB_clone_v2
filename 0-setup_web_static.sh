@@ -6,7 +6,11 @@ sudo apt-get install nginx
 sudo service nginx start
 
 # create all directories
-sudo mkdir -p data/{web_static/{current,releases/{test},shared}}
+sudo mkdir data/web_static
+sudo mkdir data/web_static/shared
+sudo mkdir data/web_static/current
+sudo mkdir data/web_static/releases
+sudo mkdir data/web_static/releases/test
 
 # create a fake html file
 echo "
