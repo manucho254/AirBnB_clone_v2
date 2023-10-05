@@ -58,10 +58,15 @@ def do_deploy(archive_path) -> bool:
 
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
+
+        # cd to home directory
+        run("cd /home/{}".format(env.user))
+
         """ create directory
            /data/web_static/releases/<archive filename without extension>
         """
         run("sudo mkdir -p {}".format(full_path))
+
         """ Uncompress the archive to the folder
             /data/web_static/releases/<archive filename without extension>
             on the web server.
@@ -72,7 +77,7 @@ def do_deploy(archive_path) -> bool:
         # Delete the archive from the web server
         run("sudo rm -rf {}".format(tmp_archive))
 
-        run("mv {}* {}".format(full_path, full_path))
+        run("sudo mv {}web_static/* {}".format(full_path, full_path))
         # Delete the symbolic link /data/web_static/current from the web server
         run("sudo rm -rf /data/web_static/current")
         """ Create a new the symbolic link /data/web_static/current
