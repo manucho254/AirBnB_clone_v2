@@ -14,7 +14,6 @@ env.user = "ubuntu"
 
 def do_pack():
     """ script that generates a .tgz archive from the contents.
-
         Return: path to archive or None
     """
     try:
@@ -39,7 +38,6 @@ def do_deploy(archive_path) -> bool:
     """ Fabric script (based on the file 1-pack_web_static.py)
         that distributes an archive to your web servers,
         using the function do_deploy.
-
         Args:
              archive_path: path to an archive file
         Return: True or False
