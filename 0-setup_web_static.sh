@@ -6,7 +6,8 @@ sudo apt-get install nginx
 sudo service nginx start
 
 # create all directories
-sudo mkdir -p data/web_static/{shared,current,releases/test}
+sudo rm -rf data
+sudo mkdir -p data/web_static/{shared,releases/test}
 
 # create a fake html file
 echo "
@@ -18,19 +19,19 @@ echo "
     </body>
 </html>" | sudo tee /data/web_static/current/index.html
 
-#change owner and group of path /data/ and all subpaths
-sudo chown -R ubuntu:ubuntu /data/
-
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
 # Check if the symbolic link already exists and delete it
 if [ -d "$target_link" ]; then
-      rm "$target_link"
+      rm -rf "$target_link"
 fi
 
 # create a symbolic link
-sudo ln -s "$source_path" "$target_link"
+sudo ln -sf "$source_path" "$target_link"
+
+#change owner and group of path /data/ and all subpaths
+sudo chown -R ubuntu:ubuntu /data/
 
 #change default file
 echo "
