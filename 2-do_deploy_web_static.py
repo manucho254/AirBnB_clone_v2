@@ -3,9 +3,10 @@
     of the web_static folder of your AirBnB Clone repo,
     using the function do_pack.
 """
-from fabric.api import local
+from fabric.api import env, run, put
 
 from os import path
+import sys
 
 env.hosts = ["52.204.99.18", "34.232.78.67"]
 
@@ -24,9 +25,9 @@ def do_deploy(archive_path) -> bool:
         return False
 
     try:
-        tmp_archive = "/tmp/{}".format(archive_path)
+        tmp_archive = "/tmp/{}".format(archive_path.split("/")[1])
         releases = "/data/web_static/releases/"
-        archive_name = tmp_archive.split()[0]
+        archive_name = archive_path.split("/")[1].split(".")[0]
         current = "/data/web_static/current"
 
         # Upload the archive to the /tmp/ directory of the web server
@@ -48,8 +49,9 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -s {} {}".format(releases, current))
+        run("sudo ln -s {}{} {}".format(releases, archive_name, current))
 
         return True
     except Exception as e:
+        raise e
         return False
