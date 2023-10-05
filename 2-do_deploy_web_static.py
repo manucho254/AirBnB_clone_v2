@@ -54,29 +54,32 @@ def do_deploy(archive_path) -> bool:
         releases = "/data/web_static/releases/"
         archive_name = archive_path.split("/")[1].split(".")[0]
         current = "/data/web_static/current"
+        full_path = "{}{}/".format(releases, archive_name)
 
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
         """ create directory
            /data/web_static/releases/<archive filename without extension>
         """
-        run("sudo mkdir -p {}{}/".format(releases, archive_name))
+        run("sudo mkdir -p {}".format(full_path))
         """ Uncompress the archive to the folder
             /data/web_static/releases/<archive filename without extension>
             on the web server.
         """
-        run("sudo tar -xzf {} -C {}{}/".format(tmp_archive,
-                                               releases,
-                                               archive_name))
+        run("sudo tar -xzf {} -C {}".format(tmp_archive,
+                                            full_path))
+
         # Delete the archive from the web server
         run("sudo rm -rf {}".format(tmp_archive))
+
+        run("mv {}* {}".format(full_path, full_path))
         # Delete the symbolic link /data/web_static/current from the web server
         run("sudo rm -rf /data/web_static/current")
         """ Create a new the symbolic link /data/web_static/current
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -sf {}{}/ {}".format(releases, archive_name, current))
+        run("sudo ln -sf {} {}".format(full_path, current))
         
         print("New version deployed!")
         
