@@ -10,7 +10,7 @@ then
 fi
 
 # create all directories
-sudo mkdir -p data/web_static/{shared,releases/test}
+sudo mkdir -p /data/web_static/{shared,releases/test}/
 
 # create a fake html file
 echo "<html>
@@ -19,11 +19,12 @@ echo "<html>
     <body>
           Holberton School
     </body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
+</html>" | sudo tee "/data/web_static/releases/test/index.html"
 
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
+# delete symbolic link
 if [ -L "$target_link" ]
 then
     rm -rf "$target_link"
