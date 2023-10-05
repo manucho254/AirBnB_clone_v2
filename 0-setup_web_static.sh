@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# file that setups all directories in server
+#file that setups all directories in server
 
 sudo apt-get -y update && sudo apt-get -y upgrade
 sudo apt-get install nginx
