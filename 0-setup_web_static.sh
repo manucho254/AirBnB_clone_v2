@@ -25,7 +25,7 @@ source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
 
 # Check if the symbolic link already exists and delete it
-if [ -L "$target_link" ]; then
+if [ -d "$target_link" ]; then
       rm "$target_link"
 fi
 
@@ -62,7 +62,7 @@ server {
                  # serve content in /data/web_static/current/;
                  alias /data/web_static/current/;
         }
-}" | sudo tee /etc/nginix/sites-available/default /etc/nginx/sites-enabled/default
+}" | sudo tee /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # restart nginx
 sudo service nginx restart
