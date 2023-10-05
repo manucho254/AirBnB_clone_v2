@@ -40,7 +40,7 @@ def do_deploy(archive_path) -> bool:
             /data/web_static/releases/<archive filename without extension>
             on the web server.
         """
-        run("sudo tar -xzf {} -C {}".format(tmp_archive, releases))
+        run("sudo tar -xzf {} -C {}{}".format(tmp_archive, releases, archive_name))
         # Delete the archive from the web server
         run("sudo rm -rf {}".format(tmp_archive))
         # Delete the symbolic link /data/web_static/current from the web server
@@ -49,7 +49,7 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -s {}{} {}".format(releases, archive_name, current))
+        run("sudo ln -sf {}{} {}".format(releases, archive_name, current))
 
         return True
     except Exception as e:
