@@ -40,7 +40,7 @@ def do_deploy(archive_path) -> bool:
             /data/web_static/releases/<archive filename without extension>
             on the web server.
         """
-        run("sudo tar -xvf {} -C {}".format(tmp_archive, releases))
+        run("sudo tar -xzf {} -C {}".format(tmp_archive, releases))
         # Delete the archive from the web server
         run("sudo rm -rf {}".format(tmp_archive))
         # Delete the symbolic link /data/web_static/current from the web server
