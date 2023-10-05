@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-#file that setups all 
-#directories in server
+# file that setups all directories in server
 
 if ! dpkg -l | grep "nginx"
 then
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get install nginx
     sudo service nginx start
 fi
 
 # create all directories
-sudo mkdir -p /data/web_static/{shared,releases/test}/
+sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 # create a fake html file
 echo "<html>
