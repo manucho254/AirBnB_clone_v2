@@ -9,6 +9,30 @@ from os import path
 import sys
 
 env.hosts = ["52.204.99.18", "34.232.78.67"]
+env.user = "ubuntu"
+
+
+def do_pack():
+    """ script that generates a .tgz archive from the contents.
+
+        Return: path to archive or None
+    """
+    try:
+        current_date = datetime.now()
+        file_name = "versions/web_static_{}{}{}{}{}{}.tgz"\
+                    .format(current_date.year,
+                            current_date.month,
+                            current_date.day,
+                            current_date.hour,
+                            current_date.minute,
+                            current_date.second)
+
+        local(f"mkdir -p versions")
+        local(f"rm -rf versions/*.tgz")
+        local(f"tar -czvf {file_name} web_static")
+        return file_name
+    except Exception as e:
+        return
 
 
 def do_deploy(archive_path) -> bool:
@@ -21,7 +45,8 @@ def do_deploy(archive_path) -> bool:
         Return: True or False
     """
     # check if archive path exists
-    if not path.exists(archive_path):
+
+    if archive_path is None or not path.exists(archive_path):
         return False
 
     try:
@@ -40,7 +65,9 @@ def do_deploy(archive_path) -> bool:
             /data/web_static/releases/<archive filename without extension>
             on the web server.
         """
-        run("sudo tar -xzf {} -C {}{}".format(tmp_archive, releases, archive_name))
+        run("sudo tar -xzf {} -C {}{}".format(tmp_archive,
+                                              releases,
+                                              archive_name))
         # Delete the archive from the web server
         run("sudo rm -rf {}".format(tmp_archive))
         # Delete the symbolic link /data/web_static/current from the web server
