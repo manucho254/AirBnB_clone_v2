@@ -17,7 +17,7 @@ echo "
     <body>
           Holberton School
     </body>
-</html>" | sudo tee /data/web_static/current/index.html
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
 source_path="/data/web_static/releases/test/"
 target_link="/data/web_static/current"
