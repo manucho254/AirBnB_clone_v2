@@ -53,7 +53,5 @@ server {
         }
 }" | sudo tee /etc/nginx/sites-available/default
 
-sudo cp -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
 # restart nginx
 sudo service nginx restart
