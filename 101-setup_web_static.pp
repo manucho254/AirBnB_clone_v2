@@ -23,10 +23,10 @@ exec { 'create all directories':
 exec { 'create html file':
     command => 'touch index.html',
 }
-exec { 'create html file':
+exec { 'add data to index file':
     command => 'echo "Holberton Shchool" > index.html',
 }
-exec { 'create html file':
+exec { 'move html file':
     command => 'sudo mv index.html /data/web_static/releases/test/',
 }
 
@@ -45,10 +45,10 @@ exec { 'change owner and group of path /data/ and all subpaths':
     command => 'sudo chown -R ubuntu:ubuntu /data/',
 }
 
-exec { 'delete default files':
+exec { 'delete /etc/nginx/sites-available/default':
     command => 'sudo rm -rf /etc/nginx/sites-available/default',
 }
-exec { 'delete default files':
+exec { 'delete /etc/nginx/sites-enabled/default':
     command => 'sudo rm -rf /etc/nginx/sites-enabled/default',
 }
 
