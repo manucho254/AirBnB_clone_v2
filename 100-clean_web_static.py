@@ -29,7 +29,7 @@ def do_pack():
                             current_date.second)
 
         local(f"mkdir -p versions")
-        #local(f"rm -rf versions/*.tgz")
+        # local(f"rm -rf versions/*.tgz")
         local(f"tar -czvf {file_name} web_static")
         return file_name
     except Exception as e:
