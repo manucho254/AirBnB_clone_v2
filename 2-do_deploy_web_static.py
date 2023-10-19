@@ -57,9 +57,6 @@ def do_deploy(archive_path) -> bool:
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
 
-        # cd to home directory
-        run("cd /home/{}".format(env.user))
-
         """ create directory
            /data/web_static/releases/<archive filename without extension>
         """
