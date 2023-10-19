@@ -28,7 +28,6 @@ def do_pack():
                             current_date.second)
 
         local(f"mkdir -p versions")
-        local(f"rm -rf versions/*.tgz")
         local(f"tar -czvf {file_name} web_static")
         return file_name
     except Exception as e:
@@ -55,6 +54,8 @@ def do_deploy(archive_path) -> bool:
         current = "/data/web_static/current"
         full_path = "{}{}/".format(releases, archive_name)
 
+        print(full_path, current)
+        return
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
 
@@ -80,7 +81,7 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -sf {} {}".format(full_path, current))
+        run("sudo ln -s {} {}".format(full_path, current))
 
         print("New version deployed!")
 
@@ -97,7 +98,6 @@ def deploy() -> bool:
     """
     archive_file = do_pack()
 
-    print(archive_file)
     if archive_file is None:
         return False
 

@@ -79,7 +79,7 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -sf {} {}".format(full_path, current))
+        run("sudo ln -s {} {}".format(full_path, current))
 
         print("New version deployed!")
 
