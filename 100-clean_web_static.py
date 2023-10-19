@@ -3,9 +3,10 @@
     of the web_static folder of your AirBnB Clone repo,
     using the function do_pack.
 """
-from fabric.api import env, run, put
+from fabric.api import env, run, local put
 
 from os import path, listdir, remove
+from datetime import datetime
 import sys
 import glob
 
@@ -28,7 +29,7 @@ def do_pack():
                             current_date.second)
 
         local(f"mkdir -p versions")
-        local(f"rm -rf versions/*.tgz")
+        #local(f"rm -rf versions/*.tgz")
         local(f"tar -czvf {file_name} web_static")
         return file_name
     except Exception as e:
@@ -58,9 +59,6 @@ def do_deploy(archive_path) -> bool:
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
 
-        # cd to home directory
-        run("cd /home/{}".format(env.user))
-
         """ create directory
            /data/web_static/releases/<archive filename without extension>
         """
@@ -83,7 +81,7 @@ def do_deploy(archive_path) -> bool:
             on the web server, linked to the new version of your code
             (/data/web_static/releases/<archive filename without extension>
         """
-        run("sudo ln -sf {} {}".format(full_path, current))
+        run("sudo ln -s {} {}".format(full_path, current))
 
         print("New version deployed!")
 
@@ -113,7 +111,7 @@ def do_clean(number=0):
              number:  the number of the archives
     """
     list_of_files = listdir('versions')  # all *.tgz files
-    directory_path = "/home/vagrant/AirBnB_clone_v2/versions"
+    directory_path = "versions"
     files_with_times = [(file_name,
                         path.getmtime(path.join(directory_path, file_name)))
                         for file_name in list_of_files
