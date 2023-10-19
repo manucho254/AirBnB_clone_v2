@@ -70,11 +70,11 @@ exec { 'create default file':
     path    => ['/usr/bin', '/usr/sbin',],
 }
 
-file { '/default':
+file { '/etc/nginx/sites-available/default':
     ensure  => present,
-    path    => '/default',
-    content => '      
-server {
+    path    => '/etc/nginx/sites-available/default',
+    content =>
+'server {
         listen 80 default_server;
 	listen [::]:80 default_server;
 	
@@ -101,11 +101,6 @@ server {
 	}
 }
 ',
-}
-
-exec { 'move default file to /etc/nginx/sites-available/':
-    command => 'sudo mv default /etc/nginx/sites-available/default',
-    path    => ['/usr/bin', '/usr/sbin',],
 }
 
 exec {'copy sites-available/default to sites-enabled/default':
