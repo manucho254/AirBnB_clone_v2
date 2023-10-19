@@ -3,7 +3,7 @@
     of the web_static folder of your AirBnB Clone repo,
     using the function do_pack.
 """
-from fabric.api import env, run, local put
+from fabric.api import env, run, local, put
 
 from os import path, listdir, remove
 from datetime import datetime
@@ -33,6 +33,7 @@ def do_pack():
         local(f"tar -czvf {file_name} web_static")
         return file_name
     except Exception as e:
+        raise e
         return
 
 
@@ -87,6 +88,7 @@ def do_deploy(archive_path) -> bool:
 
         return True
     except Exception as e:
+        raise e
         return False
 
 
@@ -112,6 +114,7 @@ def do_clean(number=0):
     """
     list_of_files = listdir('versions')  # all *.tgz files
     directory_path = "versions"
+
     files_with_times = [(file_name,
                         path.getmtime(path.join(directory_path, file_name)))
                         for file_name in list_of_files
@@ -132,3 +135,5 @@ def do_clean(number=0):
         file_path = path.join(directory_path, sorted_files[x][0])
         # delete unnecessary archives
         remove(file_path)
+
+    print("Removed files successfuly")
