@@ -54,8 +54,6 @@ def do_deploy(archive_path) -> bool:
         current = "/data/web_static/current"
         full_path = "{}{}/".format(releases, archive_name)
 
-        print(full_path, current)
-        return
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, tmp_archive)
 
