@@ -3,9 +3,10 @@
     of the web_static folder of your AirBnB Clone repo,
     using the function do_pack.
 """
-from fabric.api import env, run, put
+from fabric.api import env, run, local, put
 
 from os import path
+from datetime import datetime
 import sys
 
 env.hosts = ["52.204.99.18", "34.232.78.67"]
@@ -96,6 +97,7 @@ def deploy() -> bool:
     """
     archive_file = do_pack()
 
+    print(archive_file)
     if archive_file is None:
         return False
 
