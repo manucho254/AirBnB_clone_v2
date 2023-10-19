@@ -33,7 +33,7 @@ exec { 'move html file':
 $source_path='/data/web_static/releases/test'
 $target_link='/data/web_static/current'
 
-exec { 'create default file':
+exec { 'remove symbolic link':
     command => "sudo rm -rf ${target_link}",
 }
 
