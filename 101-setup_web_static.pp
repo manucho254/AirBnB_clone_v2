@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # file that setups all directories in server
 
 exec { 'Kill apache2 process':
