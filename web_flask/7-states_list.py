@@ -9,10 +9,9 @@ from models.state import State
 
 app = Flask(__name__)
 
-storage.reload()  # Reload objects
+#storage.reload()  # Reload objects
 states = storage.all(State)  # Get all states
 
-print(states)
 
 @app.teardown_appcontext
 def teardown_db(exception):
