@@ -13,19 +13,19 @@ storage.reload()  # Reload objects
 states = storage.all(State)  # Get all states
 
 
+@app.teardown_appcontext
+def teardown_db(exception):
+    """ remove the current SQLAlchemy Session
+    """
+    storage.close()
+
+
 @app.route("/states_list", strict_slashes=False)
 def status_list():
     """ script that starts a Flask web application:
     """
 
     return render_template("7-states_list.html", states=states.values())
-
-
-@app.teardown_appcontext
-def teardown_db(exception):
-    """ remove the current SQLAlchemy Session
-    """
-    storage.close()
 
 
 if __name__ == "__main__":
