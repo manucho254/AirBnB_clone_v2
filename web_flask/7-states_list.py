@@ -9,8 +9,8 @@ from models.state import State
 
 app = Flask(__name__)
 
-storage.reload() # Reload objects
-states = storage.all(State) # Get all states
+storage.reload()  # Reload objects
+states = storage.all(State)  # Get all states
 
 
 @app.route("/states_list", strict_slashes=False)
