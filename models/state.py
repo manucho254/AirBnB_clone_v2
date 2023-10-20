@@ -31,9 +31,11 @@ class State(BaseModel, Base):
         """ function that returns
             all cities related to state
         """
-        cities_arr = []
 
+        cities_arr = []
+        models.storage.reload()
         objects = models.storage.all(City)
+
         for val in objects.values():
             if self.id == val.state_id:
                 cities_arr.append(val)
