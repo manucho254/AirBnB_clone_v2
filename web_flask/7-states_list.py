@@ -10,7 +10,7 @@ from models.state import State
 app = Flask(__name__)
 
 storage.reload()  # Reload objects
-_states = storage.all(State)  # Get all states
+_states = storage.all(State).values()  # Get all states
 
 
 @app.route("/states_list", strict_slashes=False)
@@ -18,7 +18,7 @@ def states():
     """ script that starts a Flask web application:
     """
 
-    return render_template("7-states_list.html", states=_states.values())
+    return render_template("7-states_list.html", states=_states)
 
 
 @app.teardown_appcontext
@@ -29,4 +29,4 @@ def teardown_db(exception):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
