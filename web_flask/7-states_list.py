@@ -21,7 +21,8 @@ def states():
     """ script that starts a Flask web application:
     """
 
-    return render_template("7-states_list.html", states=_states)
+    states = sorted(list(_states), key=lambda x: x.name)
+    return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
