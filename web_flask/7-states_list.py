@@ -7,6 +7,9 @@ from flask import render_template
 from models import storage
 from models.state import State
 
+import sys
+sys.path.append("../")
+
 app = Flask(__name__)
 
 storage.reload()  # Reload objects
