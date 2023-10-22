@@ -12,16 +12,13 @@ sys.path.append("../")
 
 app = Flask(__name__)
 
-storage.reload()  # Reload objects
-_states = storage.all(State).values()  # Get all states
-
 
 @app.route("/states_list", strict_slashes=False)
 def states():
     """ script that starts a Flask web application:
     """
 
-    states = sorted(_states, key=lambda state: state.name)
+    states = sorted(storage.all(State).values(), key=lambda state: state.name)
     return render_template("7-states_list.html", states=states)
 
 
