@@ -29,7 +29,7 @@ def states():
 def state_by_id(id):
     """ get state by id:
         Args:
-             state id
+             id: state id
     """
     states = storage.all(State)
     data = {"states": None, "state": None}
