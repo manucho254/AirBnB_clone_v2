@@ -20,6 +20,7 @@ def states():
     data = {"states": None, "state": None}
     sorted_states = sorted(storage.all(State).values(),
                            key=lambda state: state.name)
+    
     data["states"] = sorted_states
     return render_template("9-states.html", data=data)
 
@@ -37,8 +38,7 @@ def state_by_id(id):
     if not states.get("State.{}".format(id)):
         return render_template("9-states.html", data=data)
 
-    state = states.get("State.{}".format(id))
-    data["state"] = state
+    data["state"] = states.get("State.{}".format(id))
     return render_template("9-states.html", data=data)
 
 
