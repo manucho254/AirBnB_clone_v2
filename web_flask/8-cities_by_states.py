@@ -16,8 +16,6 @@ app = Flask(__name__)
 def state_cities():
     """ list state and all cities related to the state:
     """
-
-    storage_type = os.getenv("HBNB_TYPE_STORAGE")
     states = sorted(storage.all(State).values(), key=lambda state: state.name)
 
     return render_template("8-cities_by_states.html", states=states)
