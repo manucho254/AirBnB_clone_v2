@@ -17,7 +17,7 @@ def state_by_id(id):
         Args:
              id: state id
     """
-    data = {"states": None, "state": None}
+    data = {}
     states = storage.all(State)
 
     if id is None:
