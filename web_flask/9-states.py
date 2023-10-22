@@ -7,17 +7,7 @@ from flask import render_template
 from models import storage
 from models.state import State
 
-import sys
-sys.path.append("../")
-
 app = Flask(__name__)
-
-
-@app.teardown_appcontext
-def teardown_db(exception):
-    """ remove the current SQLAlchemy Session
-    """
-    storage.close()
 
 
 @app.route("/states", defaults={"id": None}, strict_slashes=False)
@@ -42,6 +32,13 @@ def state_by_id(id):
 
     data["state"] = states.get("State.{}".format(id))
     return render_template("9-states.html", data=data)
+
+
+@app.teardown_appcontext
+def teardown_db(exception):
+    """ remove the current SQLAlchemy Session
+    """
+    storage.close()
 
 
 if __name__ == "__main__":
