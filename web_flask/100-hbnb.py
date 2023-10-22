@@ -19,7 +19,7 @@ def states():
 
     states = sorted(storage.all(State).values(),
                     key=lambda state: state.name)
-    
+
     amenities = sorted(storage.all(Amenity).values(),
                        key=lambda amenity: amenity.name)
 

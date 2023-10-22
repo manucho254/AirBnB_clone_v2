@@ -15,9 +15,8 @@ def state_cities():
     """ list state and all cities related to the state:
     """
 
-    sorted_states = sorted(storage.all(State).values(),
-                           key=lambda state: state.name)
-
+    states = storage.all(State).values()
+    sorted_states = sorted(states, key=lambda state: state.name)
     return render_template("8-cities_by_states.html", states=sorted_states)
 
 
