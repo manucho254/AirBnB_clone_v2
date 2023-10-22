@@ -18,6 +18,7 @@ def state_cities():
 
     return render_template("8-cities_by_states.html", states=states)
 
+
 @app.teardown_appcontext
 def tear_down(exception):
     """ remove the current SQLAlchemy Session
