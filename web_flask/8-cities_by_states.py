@@ -17,15 +17,7 @@ def state_cities():
     """
     states = sorted(storage.all(State).values(), key=lambda state: state.name)
 
-    data = []
-
-    for state in states:
-        new = {"id": state.id, "name": state.name}
-        sort_cities = sorted(state.cities, key=lambda city: city.name)
-        new["cities"] = {city.id: city.name for city in sort_cities}
-        data.append(new)
-
-    return render_template("8-cities_by_states.html", states=data)
+    return render_template("8-cities_by_states.html", states=states)
 
 
 @app.teardown_appcontext
