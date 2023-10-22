@@ -38,7 +38,7 @@ def state_by_id(id):
 
     # check if id is valid
     if states.get("State.{}".format(id)) is None:
-        return render_template("9-states.html", data=data)
+        return render_template("9-states.html", data=None)
 
     data["state"] = states.get("State.{}".format(id))
     return render_template("9-states.html", data=data)
