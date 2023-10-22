@@ -13,13 +13,28 @@ sys.path.append("../")
 app = Flask(__name__)
 
 
-@app.route("/states", strict_slashes=False)
-def states():
-    """ script that starts a Flask web application:
+@app.route("/states", defaults={'id': None}, strict_slashes=False)
+@app.route("/states/<id>", strict_slashes=False)
+def states(id):
+    """ script that starts a Flask web application
     """
 
-    states = sorted(storage.all(State).values(), key=lambda state: state.name)
-    return render_template("7-states_list.html", states=states)
+    states = storage.all(State)
+    data = {"states": None, "state": None}
+
+    if id is None:
+        sorted_states = sorted(storage.all(State).values(),
+                               key=lambda state: state.name)
+        data["states"] = sorted_states
+        return render_template("9-states.html", data=data)
+
+    # check if id is valid
+    if not states.get("State.{}".format(id)):
+        return render_template("9-states.html", data=data)
+
+    state = states.get("State.{}".format(id))
+    data["state"] = state
+    return render_template("9-states.html", data=data)
 
 
 @app.teardown_appcontext
