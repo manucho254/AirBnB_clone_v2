@@ -30,7 +30,7 @@ def state_by_id(state_id):
     if states.get("State.{}".format(state_id)) is None:
         return render_template("9-states.html", data=None)
 
-    data["state"] = states.get("State.{}".format(id))
+    data["state"] = states.get("State.{}".format(state_id))
     return render_template("9-states.html", data=data)
 
 
