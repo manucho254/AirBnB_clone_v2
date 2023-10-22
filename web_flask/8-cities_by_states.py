@@ -24,6 +24,9 @@ def state_cities():
     """
     states = sorted(storage.all(State).values(), key=lambda state: state.name)
 
+    if len(states) == 0:
+        states = None
+
     return render_template("8-cities_by_states.html", states=states)
 
 
