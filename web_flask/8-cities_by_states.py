@@ -14,6 +14,7 @@ app = Flask(__name__)
 def state_cities():
     """ list state and all cities related to the state:
     """
+
     sorted_states = sorted(storage.all(State).values(),
                            key=lambda state: state.name)
 
