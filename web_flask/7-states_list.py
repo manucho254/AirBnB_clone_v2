@@ -12,7 +12,7 @@ sys.path.append("../")
 
 app = Flask(__name__)
 
-storage.reload()  # Reload objects
+# storage.reload()  # Reload objects
 _states = storage.all(State).values()  # Get all states
 
 
