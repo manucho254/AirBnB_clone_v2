@@ -12,7 +12,7 @@ from models.place import Place
 app = Flask(__name__)
 
 
-@app.route("/hbnb_filters", strict_slashes=False)
+@app.route("/hbnb", strict_slashes=False)
 def states():
     """ script that starts a Flask web application:
     """

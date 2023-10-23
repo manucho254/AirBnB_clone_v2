@@ -39,6 +39,7 @@
 	border-radius: 4px;
 	overflow-y: scroll;
 	max-height: 300px;
+	z-index: 9990;
 }
 
 .locations:hover .popover {
